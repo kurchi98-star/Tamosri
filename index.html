@@ -12,7 +12,7 @@ body {
   margin: 0;
   font-family: 'Segoe UI', Arial, sans-serif;
   background: linear-gradient(to bottom, #fff1f6, #ffffff);
-  padding: env(safe-area-inset-top) 14px 40px;
+  padding: env(safe-area-inset-top) 14px 60px;
   overflow-x: hidden;
 }
 
@@ -89,7 +89,7 @@ button:hover { transform: scale(1.05); }
   transform: translateY(0);
 }
 
-/* Hearts */
+/* Falling hearts */
 .heart {
   position: fixed;
   top: -40px;
@@ -110,7 +110,7 @@ button:hover { transform: scale(1.05); }
   100% { transform: scale(1); }
 }
 
-/* BACK TO TOP */
+/* Back to top */
 #backToTop {
   position: fixed;
   bottom: 24px;
@@ -127,26 +127,37 @@ button:hover { transform: scale(1.05); }
   z-index: 10;
 }
 
-/* FINAL SCREEN */
+/* Final overlay */
 #finalScreen {
   position: fixed;
   inset: 0;
   background: radial-gradient(circle, #ffdde7, #ff4d6d);
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   color: white;
   text-align: center;
-  font-size: 26px;
   z-index: 20;
-  display: none;
+  padding: 20px;
 }
 
 #finalScreen .big-ring {
   font-size: 90px;
   margin-top: 20px;
   animation: ringPop 2s ease forwards;
+}
+
+#finalScreen button {
+  margin-top: 26px;
+  padding: 12px 26px;
+  font-size: 16px;
+  border: none;
+  border-radius: 20px;
+  background: white;
+  color: #ff4d6d;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
 }
 </style>
 </head>
@@ -197,8 +208,9 @@ button:hover { transform: scale(1.05); }
 <button id="backToTop">⬆ Back to top ❤️</button>
 
 <div id="finalScreen">
-  <div>I love you forever ❤️</div>
+  <div style="font-size:26px;">I love you forever ❤️</div>
   <div class="big-ring">💍</div>
+  <button id="continueBtn">Continue our memories ❤️</button>
 </div>
 
 <audio id="music" loop>
@@ -213,6 +225,9 @@ const result = document.getElementById("result");
 const music = document.getElementById("music");
 const backToTop = document.getElementById("backToTop");
 const finalScreen = document.getElementById("finalScreen");
+const continueBtn = document.getElementById("continueBtn");
+
+let finalShown = false;
 
 /* NO runs away */
 noBtn.addEventListener("mouseover", () => {
@@ -250,16 +265,24 @@ const observer = new IntersectionObserver(entries => {
 
 images.forEach(img => observer.observe(img));
 
-/* Back to top */
+/* Scroll logic */
 window.addEventListener("scroll", () => {
   backToTop.style.display = window.scrollY > 300 ? "block" : "none";
 
-  if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 10) {
-    setTimeout(() => finalScreen.style.display = "flex", 1200);
+  if (!finalShown &&
+      window.innerHeight + window.scrollY >= document.body.offsetHeight - 10) {
+    finalShown = true;
+    setTimeout(() => finalScreen.style.display = "flex", 1000);
   }
 });
 
+/* Back to top */
 backToTop.onclick = () => window.scrollTo({ top: 0, behavior: "smooth" });
+
+/* Continue memories */
+continueBtn.onclick = () => {
+  finalScreen.style.display = "none";
+};
 </script>
 
 </body>
