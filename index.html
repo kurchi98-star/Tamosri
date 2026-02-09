@@ -105,7 +105,7 @@ button:hover { transform: scale(1.06); }
   position: fixed;
   top: -30px;
   font-size: 22px;
-  animation: fall linear infinite;
+  animation: fall linear forwards;
   pointer-events: none;
 }
 
@@ -267,7 +267,7 @@ yesBtn.onclick = () => {
     // Remove heart after falling
     h.addEventListener("animationend", () => h.remove());
     document.body.appendChild(h);
-  }, 300); // a new heart every 0.3s
+  }, 400); // a new heart every 0.4s
 
   // Stop after 10 seconds
   setTimeout(() => clearInterval(heartInterval), 10000);
@@ -293,6 +293,7 @@ backToTop.onclick = () => {
 
 </body>
 </html>
+
 
 
 
