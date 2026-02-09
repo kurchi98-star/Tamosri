@@ -178,6 +178,12 @@ button:hover { transform: scale(1.06); }
     </small>
   </div>
 
+  <div class="ring">💍</div>
+
+  <div class="subscription">
+    Marriage subscription renewed till eternity ♾️
+  </div>
+
   <div class="album-scroll-hint" id="albumScrollHint">
     Scroll for more memories ↓
   </div>
@@ -230,13 +236,16 @@ yesBtn.onclick = () => {
   result.classList.remove("hidden");
   music.play();
 
-  for (let i = 0; i < 25; i++) {
-    const h = document.createElement("div");
-    h.className = "heart";
-    h.innerHTML = "❤️";
-    h.style.left = Math.random() * 100 + "vw";
-    h.style.animationDuration = (Math.random() * 3 + 3) + "s";
-    document.body.appendChild(h);
+ for (let i = 0; i < 12; i++) { // fewer hearts
+  const h = document.createElement("div");
+  h.className = "heart";
+  h.innerHTML = "❤️";
+  h.style.left = Math.random() * 100 + "vw";
+  h.style.animationDuration = (Math.random() * 3 + 3) + "s";
+
+  // Remove heart after falling
+  h.addEventListener("animationend", () => h.remove());
+  document.body.appendChild(h);
   }
 };
 
@@ -260,3 +269,4 @@ backToTop.onclick = () => {
 
 </body>
 </html>
+
