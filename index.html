@@ -14,7 +14,7 @@ body {
   overflow-x: hidden;
 }
 
-/* CENTER CARD */
+/* CARD */
 .card {
   max-width: 95%;
   margin: 40px auto;
@@ -55,19 +55,6 @@ button:hover { transform: scale(1.06); }
   position: relative;
 }
 
-/* SCROLL HINT */
-.scroll-hint {
-  margin-top: 18px;
-  font-size: 14px;
-  color: #ff4d6d;
-  animation: bounce 1.6s infinite;
-}
-
-@keyframes bounce {
-  0%,100% { transform: translateY(0); opacity: .6; }
-  50% { transform: translateY(6px); opacity: 1; }
-}
-
 .hidden { display: none; }
 
 /* LOVE MESSAGE */
@@ -91,7 +78,7 @@ button:hover { transform: scale(1.06); }
   animation: fadeIn 1.2s ease;
 }
 
-/* ALBUM SCROLL HINT */
+/* SCROLL FOR MEMORIES */
 .album-scroll-hint {
   font-size: 14px;
   color: #ff4d6d;
@@ -153,6 +140,11 @@ button:hover { transform: scale(1.06); }
   cursor: pointer;
 }
 
+@keyframes bounce {
+  0%,100% { transform: translateY(0); opacity: .6; }
+  50% { transform: translateY(6px); opacity: 1; }
+}
+
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
@@ -173,8 +165,6 @@ button:hover { transform: scale(1.06); }
     <button id="yes">YES ❤️</button>
     <button id="no">NO 🙈</button>
   </div>
-
-  <div class="scroll-hint">Scroll down ↓</div>
 </div>
 
 <!-- RESULT -->
