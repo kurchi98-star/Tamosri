@@ -79,30 +79,44 @@ button:hover { transform: scale(1.06); }
 
 
   /* ===== ADDED: Heart-shaped photo on first screen ===== */
+/* ===== ADDED / FIXED: Proper heart shape for photo ===== */
 .heart-photo {
-  width: 150px;
-  height: 150px;
-  margin: 0 auto 20px;
+  position: relative;
+  width: 160px;
+  height: 160px;
+  margin: 0 auto 22px;
+  transform: rotate(-45deg);
   overflow: hidden;
-  clip-path: polygon(
-    50% 0%,
-    61% 10%,
-    75% 25%,
-    75% 45%,
-    50% 70%,
-    25% 45%,
-    25% 25%,
-    39% 10%
-  );
-  border: 2px solid #ff4d6d;
+}
+
+.heart-photo::before,
+.heart-photo::after {
+  content: "";
+  position: absolute;
+  width: 160px;
+  height: 160px;
+  background: #ff4d6d;
+  border-radius: 50%;
+}
+
+.heart-photo::before {
+  top: -80px;
+  left: 0;
+}
+
+.heart-photo::after {
+  left: 80px;
+  top: 0;
 }
 
 .heart-photo img {
-  width: 100%;
-  height: 100%;
+  position: absolute;
+  width: 160px;
+  height: 160px;
   object-fit: cover;
+  transform: rotate(45deg);
+  z-index: 2;
 }
-
 
   
 /* ALBUM */
@@ -205,9 +219,15 @@ button:hover { transform: scale(1.06); }
 <div class="card" id="question">
 
    <!-- ===== ADDED: Heart-shaped photo at the top ===== -->
-  <div class="heart-photo">
-    <img src="your-photo.jpg" alt="Us"> <!-- Replace your-photo.jpg with actual image -->
-  </div>
+ <div class="heart-photo">
+  <img src="your-photo.jpg" alt="Us">
+</div>
+
+<!-- ===== ADDED: NO button warning message ===== -->
+<div id="noMessage"
+     style="color:#ff4d6d; margin-top:12px; font-weight:bold; display:none;">
+  Oops! Sorry, not an option 😭
+</div>
   
   <h2>
     Will you marry me again on 12/02/2026? 💍<br>
@@ -291,12 +311,13 @@ noBtn.addEventListener("mouseover", () => {
 });
 
   // ===== ADDED: Show message when NO button is clicked =====
-noBtn.addEventListener("click", () => {
+  noBtn.addEventListener("mouseover", () => {
   const noMsg = document.getElementById("noMessage");
   noMsg.style.display = "block";
+
   setTimeout(() => {
     noMsg.style.display = "none";
-  }, 2000); // message disappears after 2 seconds
+  }, 1500);
 });
 
 yesBtn.onclick = () => {
@@ -341,6 +362,7 @@ backToTop.onclick = () => {
 
 </body>
 </html>
+
 
 
 
