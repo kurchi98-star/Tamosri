@@ -1,38 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Happy Anniversary ❤️</title>
 
 <style>
-* { box-sizing: border-box; }
-
 body {
   margin: 0;
   font-family: 'Segoe UI', Arial, sans-serif;
-  background: linear-gradient(to bottom, #fff1f6, #ffffff);
-  padding: env(safe-area-inset-top) 14px 60px;
+  background: radial-gradient(circle at top, #1a1a2e, #0f0f1a);
+  color: white;
   overflow-x: hidden;
 }
 
-/* Card */
+/* CENTER CARD */
 .card {
-  max-width: 420px;
-  margin: 40px auto 0;
-  background: white;
-  border-radius: 26px;
-  padding: 28px 22px 34px;
+  max-width: 95%;
+  margin: 40px auto;
+  background: rgba(255,255,255,0.96);
+  color: #333;
+  padding: 30px 20px;
+  border-radius: 22px;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.5);
   text-align: center;
-  box-shadow: 0 22px 55px rgba(0,0,0,0.15);
-  position: relative;
-  z-index: 2;
 }
 
-h1 {
-  font-size: 22px;
-  line-height: 1.5;
-  margin-bottom: 18px;
+/* BUTTON ROW */
+.btn-row {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 20px;
 }
 
 button {
@@ -41,123 +40,122 @@ button {
   border: none;
   border-radius: 14px;
   cursor: pointer;
-  margin: 12px;
   transition: transform 0.2s;
 }
 
-button:hover { transform: scale(1.05); }
+button:hover { transform: scale(1.06); }
 
-#yes { background: #ff4d6d; color: white; }
-#no { background: #eee; position: absolute; }
+#yes {
+  background: #ff4d6d;
+  color: white;
+}
+
+#no {
+  background: #eee;
+  position: relative;
+}
+
+/* SCROLL HINT */
+.scroll-hint {
+  margin-top: 18px;
+  font-size: 14px;
+  color: #ff4d6d;
+  animation: bounce 1.6s infinite;
+}
+
+@keyframes bounce {
+  0%,100% { transform: translateY(0); opacity: .6; }
+  50% { transform: translateY(6px); opacity: 1; }
+}
 
 .hidden { display: none; }
 
-/* Final text */
+/* LOVE MESSAGE */
 .final-message {
-  font-size: 18px;
-  line-height: 1.7;
+  font-size: 20px;
+  line-height: 1.6;
   margin-bottom: 18px;
 }
 
-.ring {
-  font-size: 54px;
-  margin: 12px 0;
-  animation: ringPop 1.8s ease forwards;
+/* ALBUM */
+.album {
+  max-width: 420px;
+  margin: 0 auto;
 }
 
-.subscription {
-  margin: 12px 0 22px;
-  font-size: 18px;
-  font-weight: 600;
-  color: #ff4d6d;
-}
-
-/* LOVE ALBUM */
 .album img {
   width: 100%;
-  margin-bottom: 22px;
-  border-radius: 22px;
-  object-fit: cover;
-  box-shadow: 0 14px 35px rgba(0,0,0,0.35);
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 1s ease, transform 1s ease;
+  margin-bottom: 18px;
+  border-radius: 18px;
+  object-fit: contain;
+  animation: fadeIn 1.2s ease;
 }
 
-.album img.visible {
-  opacity: 1;
-  transform: translateY(0);
+/* ALBUM SCROLL HINT */
+.album-scroll-hint {
+  font-size: 14px;
+  color: #ff4d6d;
+  margin-bottom: 16px;
+  animation: bounce 1.6s infinite;
 }
 
-/* Falling hearts */
+/* FALLING HEARTS */
 .heart {
   position: fixed;
-  top: -40px;
+  top: -30px;
   font-size: 22px;
   animation: fall linear infinite;
-  opacity: 0.85;
   pointer-events: none;
-  z-index: 1;
 }
 
 @keyframes fall {
   to { transform: translateY(110vh); }
 }
 
-@keyframes ringPop {
-  0% { transform: scale(0); opacity: 0; }
-  60% { transform: scale(1.3); opacity: 1; }
-  100% { transform: scale(1); }
-}
-
-/* Back to top */
-#backToTop {
-  position: fixed;
-  bottom: 24px;
-  right: 20px;
-  background: #ff4d6d;
-  color: white;
-  border: none;
-  border-radius: 30px;
-  padding: 12px 18px;
-  font-size: 14px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-  cursor: pointer;
-  display: none;
-  z-index: 10;
-}
-
-/* Final overlay */
+/* FINAL SCREEN */
 #finalScreen {
   position: fixed;
   inset: 0;
-  background: radial-gradient(circle, #ffdde7, #ff4d6d);
+  background: rgba(0,0,0,0.85);
   display: none;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   color: white;
+  z-index: 999;
   text-align: center;
-  z-index: 20;
-  padding: 20px;
 }
 
-#finalScreen .big-ring {
-  font-size: 90px;
-  margin-top: 20px;
-  animation: ringPop 2s ease forwards;
+#finalScreen div {
+  font-size: 30px;
+  margin-bottom: 14px;
 }
 
 #finalScreen button {
-  margin-top: 26px;
   padding: 12px 26px;
-  font-size: 16px;
-  border: none;
   border-radius: 20px;
+  border: none;
   background: white;
   color: #ff4d6d;
   cursor: pointer;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+/* BACK TO TOP */
+#backToTop {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 16px;
+  background: #ff4d6d;
+  color: white;
+  border-radius: 20px;
+  display: none;
+  cursor: pointer;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 </style>
 </head>
@@ -166,12 +164,17 @@ button:hover { transform: scale(1.05); }
 
 <!-- QUESTION -->
 <div class="card" id="question">
-  <h1>
+  <h2>
     Will you marry me again on 12/02/2026? 💍<br>
     <small>Press YES to renew marriage subscription 💖</small>
-  </h1>
-  <button id="yes">YES ❤️</button>
-  <button id="no">NO 🙈</button>
+  </h2>
+
+  <div class="btn-row">
+    <button id="yes">YES ❤️</button>
+    <button id="no">NO 🙈</button>
+  </div>
+
+  <div class="scroll-hint">Scroll down ↓</div>
 </div>
 
 <!-- RESULT -->
@@ -179,16 +182,14 @@ button:hover { transform: scale(1.05); }
   <div class="final-message">
     You are my entire universe. 🌍<br><br>
     Happy anniversary, Husband! ♥️<br><br>
-    <span style="font-size:16px;">
+    <small>
       P.S. I need a proposal from you soon, so that you don’t get to say
       “I never even proposed you” ever again. 😒😏
-    </span>
+    </small>
   </div>
 
-  <div class="ring">💍</div>
-
-  <div class="subscription">
-    Marriage subscription renewed till eternity ♾️
+  <div class="album-scroll-hint" id="albumScrollHint">
+    Scroll for more memories ↓
   </div>
 
   <div class="album">
@@ -205,83 +206,65 @@ button:hover { transform: scale(1.05); }
   </div>
 </div>
 
-<button id="backToTop">⬆ Back to top ❤️</button>
-
+<!-- FINAL SCREEN -->
 <div id="finalScreen">
-  <div style="font-size:26px;">I love you forever ❤️</div>
-  <div class="big-ring">💍</div>
+  <div>I love you forever ❤️</div>
+  <div style="font-size:50px;">💍</div>
   <button id="continueBtn">Continue our memories ❤️</button>
 </div>
+
+<div id="backToTop">↑ Top</div>
 
 <audio id="music" loop>
   <source src="Ebhabe_golpo_hok.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-const noBtn = document.getElementById("no");
 const yesBtn = document.getElementById("yes");
+const noBtn = document.getElementById("no");
 const question = document.getElementById("question");
 const result = document.getElementById("result");
 const music = document.getElementById("music");
-const backToTop = document.getElementById("backToTop");
+const albumHint = document.getElementById("albumScrollHint");
 const finalScreen = document.getElementById("finalScreen");
-const continueBtn = document.getElementById("continueBtn");
+const backToTop = document.getElementById("backToTop");
 
-let finalShown = false;
-
-/* NO runs away */
 noBtn.addEventListener("mouseover", () => {
+  noBtn.style.position = "fixed";
   noBtn.style.left = Math.random() * (window.innerWidth - 120) + "px";
   noBtn.style.top = Math.random() * (window.innerHeight - 80) + "px";
 });
 
-/* YES clicked */
-yesBtn.addEventListener("click", () => {
+yesBtn.onclick = () => {
   question.classList.add("hidden");
   result.classList.remove("hidden");
   music.play();
 
   for (let i = 0; i < 25; i++) {
-    const heart = document.createElement("div");
-    heart.className = "heart";
-    heart.innerHTML = "❤️";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.fontSize = (Math.random() * 16 + 18) + "px";
-    heart.style.animationDuration = (Math.random() * 3 + 4) + "s";
-    heart.style.animationDelay = Math.random() * 4 + "s";
-    document.body.appendChild(heart);
+    const h = document.createElement("div");
+    h.className = "heart";
+    h.innerHTML = "❤️";
+    h.style.left = Math.random() * 100 + "vw";
+    h.style.animationDuration = (Math.random() * 3 + 3) + "s";
+    document.body.appendChild(h);
   }
-});
+};
 
-/* Fade-in on scroll */
-const images = document.querySelectorAll(".album img");
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("visible");
-    }
-  });
-}, { threshold: 0.2 });
-
-images.forEach(img => observer.observe(img));
-
-/* Scroll logic */
 window.addEventListener("scroll", () => {
+  if (albumHint && window.scrollY > 40) albumHint.style.display = "none";
   backToTop.style.display = window.scrollY > 300 ? "block" : "none";
 
-  if (!finalShown &&
-      window.innerHeight + window.scrollY >= document.body.offsetHeight - 10) {
-    finalShown = true;
-    setTimeout(() => finalScreen.style.display = "flex", 1000);
+  if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 10) {
+    setTimeout(() => finalScreen.style.display = "flex", 1200);
   }
 });
 
-/* Back to top */
-backToTop.onclick = () => window.scrollTo({ top: 0, behavior: "smooth" });
-
-/* Continue memories */
-continueBtn.onclick = () => {
+document.getElementById("continueBtn").onclick = () => {
   finalScreen.style.display = "none";
+};
+
+backToTop.onclick = () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
 };
 </script>
 
