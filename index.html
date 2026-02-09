@@ -76,49 +76,25 @@ button:hover { transform: scale(1.06); }
     font-weight: 600;
     color: #ff4d6d;
   }
-
-
-  /* ===== ADDED: Heart-shaped photo on first screen ===== */
-/* ===== ADDED / FIXED: Proper heart shape for photo ===== */
-.heart-photo {
-  position: relative;
-  width: 160px;
-  height: 160px;
-  margin: 0 auto 22px;
-  transform: rotate(-45deg);
-  overflow: hidden;
-}
-
-.heart-photo::before,
-.heart-photo::after {
-  content: "";
-  position: absolute;
-  width: 160px;
-  height: 160px;
-  background: #ff4d6d;
-  border-radius: 50%;
-}
-
-.heart-photo::before {
-  top: -80px;
-  left: 0;
-}
-
-.heart-photo::after {
-  left: 80px;
-  top: 0;
-}
-
-.heart-photo img {
-  position: absolute;
-  width: 160px;
-  height: 160px;
-  object-fit: cover;
-  transform: rotate(45deg);
-  z-index: 2;
-}
-
   
+/* ===== ADDED: TOP CENTER PHOTO STYLE ===== */
+.top-photo {
+  width: 160px;
+  height: 160px;
+  margin: 0 auto 18px;   /* center + space below */
+  border-radius: 20px;  /* soft rounded corners */
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+}
+
+.top-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;    /* ensures full photo is visible nicely */
+}
+/* ===== END ADDED ===== */
+
+ 
 /* ALBUM */
 .album {
   max-width: 420px;
@@ -219,9 +195,10 @@ button:hover { transform: scale(1.06); }
 <div class="card" id="question">
 
    <!-- ===== ADDED: Heart-shaped photo at the top ===== -->
- <div class="heart-photo">
-  <img src="your-photo.jpg" alt="Us">
-</div>
+
+    <div class="top-photo">
+    <img src="your-photo.jpg" alt="Us ❤️">
+  </div>
 
 <!-- ===== ADDED: NO button warning message ===== -->
 <div id="noMessage"
@@ -362,6 +339,7 @@ backToTop.onclick = () => {
 
 </body>
 </html>
+
 
 
 
