@@ -256,18 +256,22 @@ yesBtn.onclick = () => {
   result.classList.remove("hidden");
   music.play();
 
-  // FALLING HEARTS 
- for (let i = 0; i < 8; i++) { // fewer hearts
-  const h = document.createElement("div");
-  h.className = "heart";
-  h.innerHTML = "❤️";
-  h.style.left = Math.random() * 100 + "vw";
-  h.style.animationDuration = (Math.random() * 3 + 3) + "s";
+   // FALLING HEARTS FOR 10 SECONDS
+  const heartInterval = setInterval(() => {
+    const h = document.createElement("div");
+    h.className = "heart";
+    h.innerHTML = "❤️";
+    h.style.left = Math.random() * 100 + "vw";
+    h.style.animationDuration = (Math.random() * 3 + 3) + "s";
 
-  // Remove heart after falling
-  h.addEventListener("animationend", () => h.remove());
-  document.body.appendChild(h);
-}
+    // Remove heart after falling
+    h.addEventListener("animationend", () => h.remove());
+    document.body.appendChild(h);
+  }, 300); // a new heart every 0.3s
+
+  // Stop after 10 seconds
+  setTimeout(() => clearInterval(heartInterval), 10000);
+  };
 
 window.addEventListener("scroll", () => {
   if (albumHint && window.scrollY > 40) albumHint.style.display = "none";
@@ -289,6 +293,7 @@ backToTop.onclick = () => {
 
 </body>
 </html>
+
 
 
 
