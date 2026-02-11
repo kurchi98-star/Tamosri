@@ -53,7 +53,18 @@ button:hover { transform: scale(1.06); }
 #no {
   background: #eee;
   position: relative;
+  transition: transform 0.2s, left 0.22s ease, top 0.22s ease; /* smooth movement */
+  will-change: left, top, transform;
+
 }
+
+  
+/* Fade-in (and fade-out) for the NO warning message */
+#noMessage {
+  opacity: 0;
+  transition: opacity 220ms ease;
+}
+
 
 .hidden { display: none; }
 
@@ -277,25 +288,55 @@ const albumHint = document.getElementById("albumScrollHint");
 const finalScreen = document.getElementById("finalScreen");
 const backToTop = document.getElementById("backToTop");
 
-// ===== FIXED: NO button movement + message =====
+
+// ===== Smooth NO button movement + fade-in message =====
 let noMsgTimeout;
+let noMsgHideTimeout;
+let noInitialized = false;
 
 noBtn.addEventListener("mouseover", () => {
-  // Move NO button
-  noBtn.style.position = "fixed";
-  noBtn.style.left = Math.random() * (window.innerWidth - 120) + "px";
-  noBtn.style.top = Math.random() * (window.innerHeight - 80) + "px";
+  // --- Make NO button escape smoothly ---
+  const rect = noBtn.getBoundingClientRect();
 
-  // Show message
+  // On first run: switch to fixed *without jumping* by pinning current location first.
+  if (!noInitialized) {
+    noBtn.style.position = "fixed";
+    noBtn.style.left = rect.left + "px";
+    noBtn.style.top = rect.top + "px";
+    noInitialized = true;
+  }
+
+  // Next position (keep within screen bounds)
+  const nextLeft = Math.random() * (window.innerWidth - 120);
+  const nextTop  = Math.random() * (window.innerHeight - 80);
+
+  // Use rAF so the browser registers the starting position, then transitions to the new one
+  requestAnimationFrame(() => {
+    noBtn.style.left = nextLeft + "px";
+    noBtn.style.top  = nextTop + "px";
+  });
+
+  // --- Fade-in message ---
   const noMsg = document.getElementById("noMessage");
-  noMsg.style.display = "block";
 
+  // Ensure visible, then fade to 1
+  noMsg.style.display = "block";
+  clearTimeout(noMsgHideTimeout);
+  requestAnimationFrame(() => {
+    noMsg.style.opacity = "1";
+  });
+
+  // Auto fade-out after a short time (you can tune 800)
   clearTimeout(noMsgTimeout);
   noMsgTimeout = setTimeout(() => {
-    noMsg.style.display = "none";
-  }, 1100);
-});
+    noMsg.style.opacity = "0";
 
+    // After fade completes, fully hide it
+    noMsgHideTimeout = setTimeout(() => {
+      noMsg.style.display = "none";
+    }, 220); // matches CSS transition duration
+  }, 800);
+});
 
 
 
@@ -341,6 +382,7 @@ backToTop.onclick = () => {
 
 </body>
 </html>
+
 
 
 
